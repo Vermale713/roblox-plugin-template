@@ -12,7 +12,7 @@ type DisplayImpl = {
 	new: () -> Display,
 	createDockWidget: (self: Display, info: DockWidgetPluginGuiInfo) -> DockWidgetPluginGui,
 	createOverlay: (self: Display) -> ScreenGui,
-	destroy: () -> (),
+	destroy: (self: Display) -> (),
 }
 
 type DisplayProto = {
