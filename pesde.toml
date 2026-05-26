@@ -1,0 +1,29 @@
+name = "studio713/plugin"
+version = "0.1.0"
+description = "Template for a plugin"
+authors = ["vermale713"]
+license = "MIT"
+
+[target]
+environment = "roblox"
+
+[wally_indices]
+default = "https://github.com/UpliftGames/wally-index"
+
+[indices]
+default = "https://github.com/pesde-pkg/index"
+
+[scripts]
+roblox_sync_config_generator = ".pesde/scripts/roblox_sync_config_generator.luau"
+sourcemap_generator = ".pesde/scripts/sourcemap_generator.luau"
+
+[dev_dependencies]
+scripts = { name = "pesde/scripts_argon", version = "^0.2.0", target = "lune" }
+argon = { name = "pesde/argon", version = "^2.0.28", target = "lune" }
+
+[engines]
+pesde = "^0.7.0"
+lune = "^0.10.2"
+
+[dependencies]
+Charm = { wally = "littensy/charm", version = "^0.11.0-rc.6" }
