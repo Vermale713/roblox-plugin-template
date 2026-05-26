@@ -12,9 +12,13 @@ type DisplayImpl = {
 	new: () -> Display,
 	createDockWidget: (self: Display, info: DockWidgetPluginGuiInfo) -> DockWidgetPluginGui,
 	createOverlay: (self: Display) -> ScreenGui,
+	destroy: () -> (),
 }
 
-type DisplayProto = {}
+type DisplayProto = {
+	_widget: DockWidgetPluginGui?,
+	_overlay: ScreenGui?,
+}
 
 export type Display = setmetatable<DisplayProto, DisplayImpl>
 
@@ -35,6 +39,8 @@ function Display.createDockWidget(self: Display, info: DockWidgetPluginGuiInfo)
 	root.Title = config.Name
 	root.Name = config.Name
 
+	self._widget = root
+
 	return root
 end
 
@@ -45,7 +51,15 @@ function Display.createOverlay(self: Display)
 	root.Name = config.Name
 	root.Parent = CoreGui
 
+	self._overlay = root
+
 	return root
+end
+
+function Display.destroy(self: Display)
+	if self._overlay then
+		self._overlay:Destroy()
+	end
 end
 
 return Display
