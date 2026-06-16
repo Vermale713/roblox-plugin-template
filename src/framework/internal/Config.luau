@@ -1,12 +1,12 @@
 -- IMPORTED MODULES
-local Charm = require(script.Parent.Parent.Parent.packages.Charm)
+const Charm = require(script.Parent.Parent.Parent.packages.Charm)
 
 -- PRIVATE STATE
-local _getConfig, _setConfig = Charm.signal({
+const _getConfig, _setConfig = Charm.signal({
 	Name = "Template",
 })
 
-local Config = {}
+const Config = {}
 
 Config.getConfig, Config.setConfig = _getConfig, _setConfig
 

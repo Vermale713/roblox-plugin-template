@@ -1,8 +1,8 @@
 -- SERVICES
-local CoreGui = game:GetService("CoreGui")
+const CoreGui = game:GetService("CoreGui")
 
 -- IMPORTED MODULES
-local Config = require(script.Parent.Parent.internal.Config)
+const Config = require(script.Parent.Parent.internal.Config)
 
 -- TYPES
 type DisplayType = "DockWidget" | "Overlay"
@@ -23,9 +23,9 @@ type DisplayProto = {
 export type Display = setmetatable<DisplayProto, DisplayImpl>
 
 -- PRIVATE STATE
-local _plugin = script:FindFirstAncestorWhichIsA("Plugin") :: Plugin
+const _plugin = script:FindFirstAncestorWhichIsA("Plugin") :: Plugin
 
-local Display = {} :: DisplayImpl
+const Display = {} :: DisplayImpl
 Display.__index = Display
 
 function Display.new(displayType: DisplayType)
@@ -33,8 +33,8 @@ function Display.new(displayType: DisplayType)
 end
 
 function Display.createDockWidget(self: Display, info: DockWidgetPluginGuiInfo)
-	local config = Config.getConfig()
-	local root = _plugin:CreateDockWidgetPluginGuiAsync(`Template-{config.Name}`, info)
+	const config = Config.getConfig()
+	const root = _plugin:CreateDockWidgetPluginGuiAsync(`Template-{config.Name}`, info)
 
 	root.Title = config.Name
 	root.Name = config.Name
@@ -45,8 +45,8 @@ function Display.createDockWidget(self: Display, info: DockWidgetPluginGuiInfo)
 end
 
 function Display.createOverlay(self: Display)
-	local config = Config.getConfig()
-	local root = Instance.new("ScreenGui")
+	const config = Config.getConfig()
+	const root = Instance.new("ScreenGui")
 
 	root.Name = config.Name
 	root.Parent = CoreGui

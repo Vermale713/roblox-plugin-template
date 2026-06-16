@@ -1,5 +1,5 @@
 -- IMPORTED MODULES
-local Config = require(script.Parent.Parent.internal.Config)
+const Config = require(script.Parent.Parent.internal.Config)
 
 -- TYPES
 type ToolbarImpl = {
@@ -16,15 +16,15 @@ type ToolbarProto = {
 export type Toolbar = setmetatable<ToolbarProto, ToolbarImpl>
 
 -- PRIVATE STATE
-local _plugin = script:FindFirstAncestorWhichIsA("Plugin") :: Plugin
+const _plugin = script:FindFirstAncestorWhichIsA("Plugin") :: Plugin
 
-local Toolbar = {} :: ToolbarImpl
+const Toolbar = {} :: ToolbarImpl
 Toolbar.__index = Toolbar
 
 function Toolbar.new(): Toolbar
-	local config = Config.getConfig()
+	const config = Config.getConfig()
 
-	local toolbar = _plugin:CreateToolbar(config.Name)
+	const toolbar = _plugin:CreateToolbar(config.Name)
 
 	return setmetatable({
 		_toolbar = toolbar,
@@ -33,7 +33,7 @@ function Toolbar.new(): Toolbar
 end
 
 function Toolbar.createButton(self: Toolbar, id: string, tooltip: string, icon: string, text: string?)
-	local button = self._toolbar:CreateButton(id, tooltip, icon, text)
+	const button = self._toolbar:CreateButton(id, tooltip, icon, text)
 
 	self._buttons[id] = button
 
