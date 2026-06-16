@@ -1,5 +1,5 @@
 -- IMPORTED MODULES
-const Config = require(script.Parent.Parent.internal.Config)
+const Config = require("../internal/Config")
 
 -- TYPES
 type ToolbarImpl = {

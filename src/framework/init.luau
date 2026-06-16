@@ -4,10 +4,11 @@
 ]=]
 
 -- IMPORTED MODULES
-const Toolbar = require(script.classes.Toolbar)
-const Config = require(script.internal.Config)
-const Types = require(script.Types)
-const Display = require(script.classes.Display)
+-- const Toolbar = require(script.classes.Toolbar)
+const Types = require("@self/Types")
+const Display = require("@self/classes/Display")
+const Toolbar = require("@self/classes/Toolbar")
+const Config = require("@self/internal/Config")
 
 -- TYPES
 type Config = Types.Config

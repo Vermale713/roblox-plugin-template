@@ -1,4 +1,4 @@
-const framework = require(script.framework)
+const framework = require("@self/framework")
 
 framework.init({
 	Name = "La Godly Plugin",

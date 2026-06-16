@@ -1,5 +1,5 @@
 -- IMPORTED MODULES
-const Charm = require(script.Parent.Parent.Parent.packages.Charm)
+const Charm = require("../../packages/Charm")
 
 -- PRIVATE STATE
 const _getConfig, _setConfig = Charm.signal({
