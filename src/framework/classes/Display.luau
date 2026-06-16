@@ -38,6 +38,7 @@ function Display.createDockWidget(self: Display, info: DockWidgetPluginGuiInfo)
 
 	root.Title = config.Name
 	root.Name = config.Name
+	root.Enabled = false
 
 	self._widget = root
 
@@ -50,6 +51,7 @@ function Display.createOverlay(self: Display)
 
 	root.Name = config.Name
 	root.Parent = CoreGui
+	root.Enabled = false
 
 	self._overlay = root
 
