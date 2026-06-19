@@ -1,34 +1,70 @@
---[=[
-    Framework.luau
-    Framework for a plugin
-]=]
+-- SERVICES
 
 -- IMPORTED MODULES
--- const Toolbar = require(script.classes.Toolbar)
 const Types = require("@self/Types")
-const Display = require("@self/classes/Display")
-const Toolbar = require("@self/classes/Toolbar")
-const Config = require("@self/internal/Config")
+const Promise = require("./Packages/Promise")
 
 -- TYPES
-type Config = Types.Config
+type Service = Types.Service
+type PluginConfig = Types.PluginConfig
 
-type InitOptions = {
-	Name: string,
-}
+-- CONSTANTS
 
 -- PRIVATE STATE
-const _plugin = script:FindFirstAncestorWhichIsA("Plugin") :: Plugin
 
+-- PRIVATE FUNCTIONS
+
+-- PRIVATE MODULE
+local _config: PluginConfig = {
+	Name = "Plugin",
+	Version = "0.0.0",
+}
+
+-- PUBLIC MODULE
 const Framework = {}
 
-Framework.Toolbar = Toolbar
-Framework.Display = Display
+function Framework.SetConfig(config)
+	_config = config
+end
 
-function Framework.init(opts: InitOptions)
-	Config.setConfig(function(state: Config)
-		state.Name = opts.Name
-		return state
+function Framework.GetConfig()
+	return _config
+end
+
+function Framework.Load(dir: Instance)
+	return Promise.new(function(resolve)
+		const children = dir:GetChildren()
+
+		const services: { Service } = {}
+
+		for _, child in children do
+			if not child:IsA("ModuleScript") then
+				continue
+			end
+
+			const mod: Service = (require)(child)
+			table.insert(services, mod)
+		end
+
+		resolve(services)
+	end)
+end
+
+function Framework.Start(services: { Service })
+	return Promise.new(function(resolve)
+		for _, service in services do
+			if service.OnInit then
+				service.OnInit()
+			end
+		end
+
+		for _, service in services do
+			task.spawn(function()
+				if service.OnStart then
+					service.OnStart()
+				end
+			end)
+		end
 	end)
 end
 

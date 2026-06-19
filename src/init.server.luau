@@ -1,20 +1,15 @@
-const framework = require("@self/framework")
+const LogService = game:GetService("LogService")
 
-framework.init({
-	Name = "La Godly Plugin",
+const Framework = require("@self/Framework")
+
+Framework.SetConfig({
+	Name = "Test Plugin",
+	Version = "0.0.1",
 })
 
-const toolbar = framework.Toolbar.new()
-
-toolbar:createButton("Test", "testing it foo", "", "mcdonalds")
-
-toolbar:createButton("hi", "hi", "", "ma")
-
-const display = framework.Display.new()
-
-display:createDockWidget(DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, false, 500, 500, 300, 700))
-display:createOverlay()
-
-plugin.Unloading:Connect(function()
-	print("Unloading plugin")
+Framework.Load(script.Services):andThen(Framework.Start):catch(function(err)
+	LogService:Warn(
+		"[{PluginName}] has encountered and error while loading services: {Err}",
+		{ PluginName = Framework.GetConfig().Name, Err = err }
+	)
 end)

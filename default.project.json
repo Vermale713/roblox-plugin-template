@@ -1,9 +1,9 @@
 {
-  "name": "roblox-plugin-template",
-  "tree": {
-    "$path": "src",
-    "packages": {
-        "$path": "roblox_packages"
+    "name": "roblox_plugin_template",
+    "tree": {
+        "$path": "src",
+        "Packages": {
+            "$path": "roblox_packages"
+        }
     }
-  }
 }

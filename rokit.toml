@@ -7,4 +7,3 @@
 argon = "argon-rbx/argon@2.0.29"
 pesde = "pesde-pkg/pesde@0.7.3+registry.0.2.3"
 lune = "lune-org/lune@0.10.4"
-StyLua = "JohnnyMorganz/StyLua@2.5.2"

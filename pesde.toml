@@ -1,6 +1,6 @@
-name = "studio713/plugin"
+name = "vermale713/plugin_template"
 version = "0.1.0"
-description = "Template for a plugin"
+description = "A plugin template"
 authors = ["vermale713"]
 license = "MIT"
 
@@ -19,11 +19,11 @@ sourcemap_generator = ".pesde/scripts/sourcemap_generator.luau"
 
 [dev_dependencies]
 scripts = { name = "pesde/scripts_argon", version = "^0.2.0", target = "lune" }
-argon = { name = "pesde/argon", version = "^2.0.28", target = "lune" }
+argon = { name = "pesde/argon", version = "^2.0.29", target = "lune" }
 
 [engines]
 pesde = "^0.7.0"
 lune = "^0.10.2"
 
 [dependencies]
-Charm = { wally = "littensy/charm", version = "^0.11.0-rc.6" }
+Promise = { wally = "howmanysmall/typed-promise", version = "^4.0.6" }
