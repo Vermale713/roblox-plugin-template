@@ -13,3 +13,11 @@ Framework.Load(script.Services):andThen(Framework.Start):catch(function(err)
 		{ PluginName = Framework.GetConfig().Name, Err = err }
 	)
 end)
+
+plugin.Deactivation:Connect(function()
+	Framework.Deactivate()
+end)
+
+plugin.Unloading:Connect(function()
+	Framework.Unload()
+end)
