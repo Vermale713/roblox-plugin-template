@@ -2,8 +2,10 @@
 
 -- IMPORTED MODULES
 const Display = require("@self/Display")
+const Internal = require("@self/Internal")
 const Toolbar = require("@self/Toolbar")
 const Types = require("@self/Types")
+const Janitor = require("./Packages/Janitor")
 const Promise = require("./Packages/Promise")
 
 -- TYPES
@@ -36,6 +38,8 @@ const function createPromiseCleanupFunction(method: "OnUnload" | "OnDeactivate")
 			end)
 		end
 
+		Internal.Janitor:Destroy()
+
 		resolve()
 	end)
 end
@@ -46,6 +50,8 @@ end
 const Framework = {}
 
 Framework.Toolbar = Toolbar
+Framework.Display = Display
+Framework.Janitor = Janitor
 
 function Framework.SetConfig(config)
 	_config = config

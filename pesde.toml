@@ -27,3 +27,4 @@ lune = "^0.10.2"
 
 [dependencies]
 Promise = { wally = "howmanysmall/typed-promise", version = "^4.0.6" }
+Janitor = { wally = "howmanysmall/janitor", version = "^1.18.3" }

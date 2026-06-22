@@ -11,14 +11,9 @@ type Toolbar = Framework.Toolbar
 -- CONSTANTS
 
 -- PRIVATE STATE
-const _connections: { RBXScriptConnection } = {}
+const _cleaner = Framework.Janitor.new()
 
 -- PRIVATE FUNCTIONS
-const function cleanupConnections()
-	for _, conn in _connections do
-		conn:Disconnect()
-	end
-end
 
 -- PRIVATE MODULE
 
@@ -37,7 +32,7 @@ function Hi.OnInit(toolbar: Toolbar)
 		print("hi")
 	end)
 
-	table.insert(_connections, clickConn)
+	_cleaner:Add(clickConn)
 end
 
 function Hi.OnStart()
@@ -45,11 +40,11 @@ function Hi.OnStart()
 end
 
 function Hi.OnUnload()
-	cleanupConnections()
+	_cleaner:Destroy()
 end
 
 function Hi.OnDeactivate()
-	cleanupConnections()
+	_cleaner:Destroy()
 end
 
 return Hi

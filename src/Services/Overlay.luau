@@ -12,22 +12,10 @@ type Display = Framework.Display
 -- CONSTANTS
 
 -- PRIVATE STATE
-const _connections: { RBXScriptConnection } = {}
-const _instances: { Instance } = {}
+const _cleaner = Framework.Janitor.new()
 local _isOpen = false
 
 -- PRIVATE FUNCTIONS
-const function cleanupConnections()
-	for _, conn in _connections do
-		conn:Disconnect()
-	end
-end
-
-const function cleanupInstances()
-	for _, instance in _instances do
-		instance:Destroy()
-	end
-end
 
 -- PRIVATE MODULE
 
@@ -57,8 +45,7 @@ function Overlay.OnInit(toolbar: Toolbar, display: Display)
 		button:SetActive(_isOpen)
 	end)
 
-	table.insert(_connections, clickConn)
-	table.insert(_instances, root)
+	_cleaner:Add(clickConn)
 end
 
 function Overlay.OnStart()
@@ -66,13 +53,11 @@ function Overlay.OnStart()
 end
 
 function Overlay.OnUnload()
-	cleanupConnections()
-	cleanupInstances()
+	_cleaner:Destroy()
 end
 
 function Overlay.OnDeactivate()
-	cleanupConnections()
-	cleanupInstances()
+	_cleaner:Destroy()
 end
 
 return Overlay

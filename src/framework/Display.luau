@@ -1,7 +1,8 @@
-const CoreGui = game:GetService("CoreGui")
 -- SERVICES
+const CoreGui = game:GetService("CoreGui")
 
 -- IMPORTED MODULES
+const Internal = require("./Internal")
 const Types = require("./Types")
 
 -- TYPES
@@ -36,6 +37,8 @@ function Display.CreateOverlay(self, id)
 	root.Name = id
 	root.Enabled = false
 	root.Parent = CoreGui
+
+	Internal.Janitor:Add(root)
 
 	return root
 end

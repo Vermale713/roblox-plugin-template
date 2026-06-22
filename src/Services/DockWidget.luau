@@ -12,15 +12,10 @@ type Display = Framework.Display
 -- CONSTANTS
 
 -- PRIVATE STATE
-const _connections: { RBXScriptConnection } = {}
+const _cleaner = Framework.Janitor.new()
 local _isOpen = false
 
 -- PRIVATE FUNCTIONS
-const function cleanupConnections()
-	for _, conn in _connections do
-		conn:Disconnect()
-	end
-end
 
 -- PRIVATE MODULE
 
@@ -56,7 +51,7 @@ function DockWidget.OnInit(toolbar: Toolbar, display: Display)
 		button:SetActive(_isOpen)
 	end)
 
-	table.insert(_connections, clickConn)
+	_cleaner:Add(clickConn)
 end
 
 function DockWidget.OnStart()
@@ -64,11 +59,11 @@ function DockWidget.OnStart()
 end
 
 function DockWidget.OnUnload()
-	cleanupConnections()
+	_cleaner:Destroy()
 end
 
 function DockWidget.OnDeactivate()
-	cleanupConnections()
+	_cleaner:Destroy()
 end
 
 return DockWidget
