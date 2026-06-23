@@ -1,12 +1,12 @@
 -- SERVICES
 
 -- IMPORTED MODULES
-const Display = require("@self/Display")
-const Internal = require("@self/Internal")
-const Toolbar = require("@self/Toolbar")
-const Types = require("@self/Types")
-const Janitor = require("./Packages/Janitor")
-const Promise = require("./Packages/Promise")
+const Display = require "@self/Display"
+const Internal = require "@self/Internal"
+const Toolbar = require "@self/Toolbar"
+const Types = require "@self/Types"
+const Janitor = require "./Packages/Janitor"
+const Promise = require "./Packages/Promise"
 
 -- TYPES
 export type Service = Types.Service
@@ -66,7 +66,7 @@ function Framework.Load(dir: Instance)
 		const children = dir:GetChildren()
 
 		for _, child in children do
-			if not child:IsA("ModuleScript") then
+			if not child:IsA "ModuleScript" then
 				continue
 			end
 
@@ -83,9 +83,9 @@ function Framework.Start()
 		table.freeze(_config)
 		table.freeze(_services)
 
-		const toolbar = Toolbar.new({
+		const toolbar = Toolbar.new {
 			Name = _config.Name,
-		})
+		}
 		const display = Display.new()
 
 		for _, service in _services do
@@ -105,11 +105,11 @@ function Framework.Start()
 end
 
 function Framework.Deactivate()
-	return createPromiseCleanupFunction("OnDeactivate")
+	return createPromiseCleanupFunction "OnDeactivate"
 end
 
 function Framework.Unload()
-	return createPromiseCleanupFunction("OnUnload")
+	return createPromiseCleanupFunction "OnUnload"
 end
 
 return Framework

@@ -1,11 +1,11 @@
-const LogService = game:GetService("LogService")
+const LogService = game:GetService "LogService"
 
-const Framework = require("@self/Framework")
+const Framework = require "@self/Framework"
 
-Framework.SetConfig({
+Framework.SetConfig {
 	Name = "Test Plugin",
 	Version = "0.0.1",
-})
+}
 
 Framework.Load(script.Services):andThen(Framework.Start):catch(function(err)
 	LogService:Warn(

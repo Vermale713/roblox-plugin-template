@@ -1,7 +1,7 @@
 -- SERVICES
 
 -- IMPORTED MODULES
-const Janitor = require("../Packages/Janitor")
+const Janitor = require "../Packages/Janitor"
 
 -- TYPES
 

@@ -1,7 +1,7 @@
 -- SERVICES
 
 -- IMPORTED MODULES
-const Framework = require("../Framework")
+const Framework = require "../Framework"
 
 -- TYPES
 type Toolbar = Framework.Toolbar
@@ -26,13 +26,13 @@ function Overlay.OnInit(toolbar: Toolbar, display: Display)
 	const pluginConfig = Framework.GetConfig()
 	const pluginName = pluginConfig.Name
 
-	const root = display:CreateOverlay("OverlayDisplay")
+	const root = display:CreateOverlay "OverlayDisplay"
 
 	const button =
 		toolbar:CreateButton(`Overlay_{pluginName}`, "Open a dock widget gui", "rbxassetid://12348119032", "OverlayGui")
 	button.ClickableWhenViewportHidden = true
 
-	const t = Instance.new("TextLabel")
+	const t = Instance.new "TextLabel"
 	t.Text = "Hi"
 	t.TextScaled = true
 	t.Size = UDim2.fromScale(0.2, 0.2)

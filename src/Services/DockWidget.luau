@@ -1,7 +1,7 @@
 -- SERVICES
 
 -- IMPORTED MODULES
-const Framework = require("../Framework")
+const Framework = require "../Framework"
 
 -- TYPES
 type Toolbar = Framework.Toolbar
@@ -38,7 +38,7 @@ function DockWidget.OnInit(toolbar: Toolbar, display: Display)
 	button.ClickableWhenViewportHidden = true
 	button:SetActive(widget.Enabled) -- This is incase restore was used
 
-	const t = Instance.new("TextLabel")
+	const t = Instance.new "TextLabel"
 	t.Text = "Hi"
 	t.TextScaled = true
 	t.Size = UDim2.fromScale(1, 1)

@@ -1,9 +1,9 @@
 -- SERVICES
-const CoreGui = game:GetService("CoreGui")
+const CoreGui = game:GetService "CoreGui"
 
 -- IMPORTED MODULES
-const Internal = require("./Internal")
-const Types = require("./Types")
+const Internal = require "./Internal"
+const Types = require "./Types"
 
 -- TYPES
 type DisplayImpl = Types.DisplayImpl
@@ -11,7 +11,7 @@ type DisplayProto = Types.DisplayProto
 type Display = Types.Display
 
 -- ALIASES
-const plugin = script:FindFirstAncestorWhichIsA("Plugin") :: Plugin
+const plugin = script:FindFirstAncestorWhichIsA "Plugin" :: Plugin
 
 -- CONSTANTS
 
@@ -32,7 +32,7 @@ function Display.new()
 end
 
 function Display.CreateOverlay(self, id)
-	const root = Instance.new("ScreenGui")
+	const root = Instance.new "ScreenGui"
 
 	root.Name = id
 	root.Enabled = false

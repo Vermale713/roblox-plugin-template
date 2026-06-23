@@ -1,7 +1,7 @@
 -- SERVICES
 
 -- IMPORTED MODULES
-const Framework = require("../Framework")
+const Framework = require "../Framework"
 
 -- TYPES
 type Toolbar = Framework.Toolbar
@@ -29,7 +29,7 @@ function Hi.OnInit(toolbar: Toolbar)
 	button.ClickableWhenViewportHidden = true
 
 	const clickConn = button.Click:Connect(function()
-		print("hi")
+		print "hi"
 	end)
 
 	_cleaner:Add(clickConn)

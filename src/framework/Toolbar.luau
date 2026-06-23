@@ -1,7 +1,7 @@
 -- SERVICES
 
 -- IMPORTED MODULES
-const Types = require("./Types")
+const Types = require "./Types"
 
 -- TYPES
 type ToolbarImpl = Types.ToolbarImpl
@@ -10,7 +10,7 @@ type ToolbarSettings = Types.ToolbarSettings
 type Toolbar = Types.Toolbar
 
 -- ALIASES
-const plugin = script:FindFirstAncestorWhichIsA("Plugin") :: Plugin
+const plugin = script:FindFirstAncestorWhichIsA "Plugin" :: Plugin
 
 -- CONSTANTS
 
