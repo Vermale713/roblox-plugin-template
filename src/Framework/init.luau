@@ -5,7 +5,7 @@ const Display = require "@self/Display"
 const Internal = require "@self/Internal"
 const Toolbar = require "@self/Toolbar"
 const Types = require "@self/Types"
-const Janitor = require "./Packages/Janitor"
+const Scythe = require "./Packages/Scythe"
 const Promise = require "./Packages/Promise"
 
 -- TYPES
@@ -38,7 +38,7 @@ const function createPromiseCleanupFunction(method: "OnUnload" | "OnDeactivate")
 			end)
 		end
 
-		Internal.Janitor:Destroy()
+		Scythe.destroy(Internal.Scythe)
 
 		resolve()
 	end)
@@ -51,7 +51,7 @@ const Framework = {}
 
 Framework.Toolbar = Toolbar
 Framework.Display = Display
-Framework.Janitor = Janitor
+Framework.Scythe = Scythe
 
 function Framework.SetConfig(config)
 	_config = config

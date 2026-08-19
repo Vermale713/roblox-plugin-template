@@ -1,21 +1,11 @@
--- SERVICES
-
 -- IMPORTED MODULES
 const Framework = require "../Framework"
 
 -- TYPES
 type Toolbar = Framework.Toolbar
 
--- ALIASES
-
--- CONSTANTS
-
 -- PRIVATE STATE
 const _cleaner = Framework.Janitor.new()
-
--- PRIVATE FUNCTIONS
-
--- PRIVATE MODULE
 
 -- PUBLIC MODULE
 const Hi = {}

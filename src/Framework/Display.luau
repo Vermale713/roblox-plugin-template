@@ -2,6 +2,7 @@
 const CoreGui = game:GetService "CoreGui"
 
 -- IMPORTED MODULES
+const Scythe = require "../Packages/Scythe"
 const Internal = require "./Internal"
 const Types = require "./Types"
 
@@ -12,14 +13,6 @@ type Display = Types.Display
 
 -- ALIASES
 const plugin = script:FindFirstAncestorWhichIsA "Plugin" :: Plugin
-
--- CONSTANTS
-
--- PRIVATE STATE
-
--- PRIVATE FUNCTIONS
-
--- PRIVATE MODULE
 
 -- PUBLIC MODULE
 const Display = {} :: DisplayImpl
@@ -38,7 +31,7 @@ function Display.CreateOverlay(self, id)
 	root.Enabled = false
 	root.Parent = CoreGui
 
-	Internal.Janitor:Add(root)
+	Scythe.add(Internal.Scythe, root)
 
 	return root
 end

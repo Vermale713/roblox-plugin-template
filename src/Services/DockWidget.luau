@@ -1,5 +1,3 @@
--- SERVICES
-
 -- IMPORTED MODULES
 const Framework = require "../Framework"
 
@@ -7,17 +5,9 @@ const Framework = require "../Framework"
 type Toolbar = Framework.Toolbar
 type Display = Framework.Display
 
--- ALIASES
-
--- CONSTANTS
-
 -- PRIVATE STATE
 const _cleaner = Framework.Janitor.new()
 local _isOpen = false
-
--- PRIVATE FUNCTIONS
-
--- PRIVATE MODULE
 
 -- PUBLIC MODULE
 const DockWidget = {}

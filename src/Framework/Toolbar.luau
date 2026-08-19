@@ -1,5 +1,3 @@
--- SERVICES
-
 -- IMPORTED MODULES
 const Types = require "./Types"
 
@@ -11,14 +9,6 @@ type Toolbar = Types.Toolbar
 
 -- ALIASES
 const plugin = script:FindFirstAncestorWhichIsA "Plugin" :: Plugin
-
--- CONSTANTS
-
--- PRIVATE STATE
-
--- PRIVATE FUNCTIONS
-
--- PRIVATE MODULE
 
 -- PUBLIC MODULE
 const Toolbar = {} :: ToolbarImpl
