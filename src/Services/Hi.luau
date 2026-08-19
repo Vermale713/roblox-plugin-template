@@ -1,11 +1,12 @@
 -- IMPORTED MODULES
 const Framework = require "../Framework"
+const Scythe = Framework.Scythe
 
 -- TYPES
 type Toolbar = Framework.Toolbar
 
 -- PRIVATE STATE
-const _cleaner = Framework.Janitor.new()
+const _scope = Scythe.scope()
 
 -- PUBLIC MODULE
 const Hi = {}
@@ -22,7 +23,7 @@ function Hi.OnInit(toolbar: Toolbar)
 		print "hi"
 	end)
 
-	_cleaner:Add(clickConn)
+	Scythe.add(_scope, clickConn)
 end
 
 function Hi.OnStart()
@@ -30,11 +31,15 @@ function Hi.OnStart()
 end
 
 function Hi.OnUnload()
-	_cleaner:Destroy()
+	if Scythe.isAlive(_scope) then
+		Scythe.destroy(_scope)
+	end
 end
 
 function Hi.OnDeactivate()
-	_cleaner:Destroy()
+	if Scythe.isAlive(_scope) then
+		Scythe.destroy(_scope)
+	end
 end
 
 return Hi

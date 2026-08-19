@@ -20,7 +20,7 @@ local _config: PluginConfig = {
 const _services: { Service } = {}
 
 -- PRIVATE FUNCTIONS
-const function createPromiseCleanupFunction(method: "OnUnload" | "OnDeactivate")
+const function createVowCleanupFunction(method: "OnUnload" | "OnDeactivate")
 	return Vow.new(function(id)
 		for _, service in _services do
 			task.spawn(function()
@@ -97,7 +97,7 @@ function Framework.Start()
 end
 
 function Framework.Deactivate()
-	const id = createPromiseCleanupFunction "OnDeactivate"
+	const id = createVowCleanupFunction "OnDeactivate"
 
 	Vow.await(id)
 
@@ -105,7 +105,7 @@ function Framework.Deactivate()
 end
 
 function Framework.Unload()
-	const id = createPromiseCleanupFunction "OnUnload"
+	const id = createVowCleanupFunction "OnUnload"
 
 	Vow.await(id)
 

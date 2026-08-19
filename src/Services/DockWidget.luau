@@ -1,12 +1,13 @@
 -- IMPORTED MODULES
 const Framework = require "../Framework"
+const Scythe = Framework.Scythe
 
 -- TYPES
 type Toolbar = Framework.Toolbar
 type Display = Framework.Display
 
 -- PRIVATE STATE
-const _cleaner = Framework.Janitor.new()
+const _scope = Scythe.scope()
 local _isOpen = false
 
 -- PUBLIC MODULE
@@ -41,7 +42,7 @@ function DockWidget.OnInit(toolbar: Toolbar, display: Display)
 		button:SetActive(_isOpen)
 	end)
 
-	_cleaner:Add(clickConn)
+	Scythe.add(_scope, clickConn)
 end
 
 function DockWidget.OnStart()
@@ -49,11 +50,15 @@ function DockWidget.OnStart()
 end
 
 function DockWidget.OnUnload()
-	_cleaner:Destroy()
+	if Scythe.isAlive(_scope) then
+		Scythe.destroy(_scope)
+	end
 end
 
 function DockWidget.OnDeactivate()
-	_cleaner:Destroy()
+	if Scythe.isAlive(_scope) then
+		Scythe.destroy(_scope)
+	end
 end
 
 return DockWidget

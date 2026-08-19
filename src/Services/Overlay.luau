@@ -1,12 +1,13 @@
 -- IMPORTED MODULES
 const Framework = require "../Framework"
+const Scythe = Framework.Scythe
 
 -- TYPES
 type Toolbar = Framework.Toolbar
 type Display = Framework.Display
 
 -- PRIVATE STATE
-const _cleaner = Framework.Janitor.new()
+const _scope = Scythe.scope()
 local _isOpen = false
 
 -- PUBLIC MODULE
@@ -35,7 +36,7 @@ function Overlay.OnInit(toolbar: Toolbar, display: Display)
 		button:SetActive(_isOpen)
 	end)
 
-	_cleaner:Add(clickConn)
+	Scythe.add(_scope, clickConn)
 end
 
 function Overlay.OnStart()
@@ -43,11 +44,15 @@ function Overlay.OnStart()
 end
 
 function Overlay.OnUnload()
-	_cleaner:Destroy()
+	if Scythe.isAlive(_scope) then
+		Scythe.destroy(_scope)
+	end
 end
 
 function Overlay.OnDeactivate()
-	_cleaner:Destroy()
+	if Scythe.isAlive(_scope) then
+		Scythe.destroy(_scope)
+	end
 end
 
 return Overlay
