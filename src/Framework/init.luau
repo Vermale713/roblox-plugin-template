@@ -1,22 +1,16 @@
--- SERVICES
-
 -- IMPORTED MODULES
 const Display = require "@self/Display"
 const Internal = require "@self/Internal"
 const Toolbar = require "@self/Toolbar"
 const Types = require "@self/Types"
+const Vow = require "./Packages/Vow"
 const Scythe = require "./Packages/Scythe"
-const Promise = require "./Packages/Promise"
 
 -- TYPES
 export type Service = Types.Service
 export type PluginConfig = Types.PluginConfig
 export type Toolbar = Types.Toolbar
 export type Display = Types.Display
-
--- ALIASES
-
--- CONSTANTS
 
 -- PRIVATE STATE
 local _config: PluginConfig = {
@@ -27,24 +21,19 @@ const _services: { Service } = {}
 
 -- PRIVATE FUNCTIONS
 const function createPromiseCleanupFunction(method: "OnUnload" | "OnDeactivate")
-	return Promise.new(function(resolve)
+	return Vow.new(function(id)
 		for _, service in _services do
 			task.spawn(function()
 				const callback = service[method]
 				if callback then
-					-- Type system bs
 					(callback :: () -> ())()
 				end
 			end)
 		end
 
-		Scythe.destroy(Internal.Scythe)
-
-		resolve()
+		Vow.resolve(id)
 	end)
 end
-
--- PRIVATE MODULE
 
 -- PUBLIC MODULE
 const Framework = {}
@@ -52,6 +41,7 @@ const Framework = {}
 Framework.Toolbar = Toolbar
 Framework.Display = Display
 Framework.Scythe = Scythe
+Framework.Vow = Vow
 
 function Framework.SetConfig(config)
 	_config = config
@@ -62,7 +52,7 @@ function Framework.GetConfig()
 end
 
 function Framework.Load(dir: Instance)
-	return Promise.new(function(resolve)
+	return Vow.new(function(id)
 		const children = dir:GetChildren()
 
 		for _, child in children do
@@ -74,12 +64,12 @@ function Framework.Load(dir: Instance)
 			table.insert(_services, mod)
 		end
 
-		resolve()
+		Vow.resolve(id)
 	end)
 end
 
 function Framework.Start()
-	return Promise.new(function(resolve)
+	return Vow.new(function(id)
 		table.freeze(_config)
 		table.freeze(_services)
 
@@ -101,15 +91,27 @@ function Framework.Start()
 				end
 			end)
 		end
+
+		Vow.resolve(id)
 	end)
 end
 
 function Framework.Deactivate()
-	return createPromiseCleanupFunction "OnDeactivate"
+	const id = createPromiseCleanupFunction "OnDeactivate"
+
+	Vow.await(id)
+
+	Vow.destroy(id)
 end
 
 function Framework.Unload()
-	return createPromiseCleanupFunction "OnUnload"
+	const id = createPromiseCleanupFunction "OnUnload"
+
+	Vow.await(id)
+
+	Scythe.destroy(Internal.Scythe)
+
+	Vow.destroy(id)
 end
 
 return Framework
