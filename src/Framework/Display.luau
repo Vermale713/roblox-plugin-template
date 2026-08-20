@@ -41,6 +41,7 @@ function Display.CreateDockWidget(self, id, info)
 
 	root.Name = id
 	root.Title = id
+	Scythe.add(Internal.Scythe, root)
 
 	return root
 end
